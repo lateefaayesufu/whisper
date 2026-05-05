@@ -623,6 +623,8 @@ const App = (() => {
         const senderName = convItem
           ? convItem.dataset.displayname || convItem.dataset.username
           : "Someone";
+        const senderName =
+          Store.getActiveConv()?.display_name || msg.from_user_id;
         showToast(`New message from ${senderName}`, "info");
       }
     });

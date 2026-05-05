@@ -199,6 +199,8 @@ The password is sent over HTTPS to the server for server-side bcrypt hashing. Th
 
 - **Session is lost on page close.** The private key is held only in JavaScript memory and is gone when the tab is closed. The user must re-enter their password after every browser session. This is intentional for security but may be inconvenient.
 
+- The API guide suggests AES-KW for private key wrapping, but AES-KW requires the plaintext to be a multiple of 8 bytes — RSA PKCS8 exports are not guaranteed to meet this. We use AES-GCM instead, which has no alignment requirement and provides authenticated encryption
+
 ---
 
 ## Running Locally
@@ -207,7 +209,6 @@ The application is a static set of HTML and JavaScript files with no build step.
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/whisperbox.git
 cd whisperbox
 
 # Serve with any static file server, for example:
